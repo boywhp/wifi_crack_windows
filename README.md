@@ -1,5 +1,7 @@
 # wifi_crack_windows
 wifi crack project for windows
+如使用本工程代码用于商业软件, 请在Thanks列表里署个名boywhp@126.com, 谢谢!
+我的weibo: http://weibo.com/u/2702964511 欢迎打赏
 
 1. 命令行参数
 /Install	安装卸载wifi过滤驱动，未指定情况下，程序会自动检测并安装驱动
@@ -14,9 +16,7 @@ wifi crack project for windows
 /Deauth /Channel x	对指定的频道自动进行wifi攻击，并抓取EAPOL握手包，容易被用户察觉
 /Channel x	对指定频道进行嗅探，抓取EAPOL握手包，适合长时间运行
 
-3. wifi_convert	xxx.pcap	通过读取pcap文件自动分析EAPOL登录数据
-
-4. 注意事项
+3. 注意事项
 
 win7运行需要管理员权限
 部分wifi硬件（Ralink）在程序Deauth攻击退出后可能会出现无法正常工作，请手工重置wifi网卡
