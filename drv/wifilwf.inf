@@ -1,0 +1,91 @@
+;-------------------------------------------------------------------------
+; NdisLwf.INF -- NDIS Usermode I/O Driver
+;
+; Copyright (c) Microsoft Corporation.  All rights reserved.
+;-------------------------------------------------------------------------
+[version]
+Signature   	= "$Windows NT$"
+Class     	= NetService
+ClassGUID  	= {4D36E974-E325-11CE-BFC1-08002BE10318}
+Provider    	= %Msft%
+DriverVer	=10/01/2002,6.0.5019.0
+
+[Manufacturer]
+%Msft%=MSFT,NTx86,NTia64,NTamd64
+
+[MSFT.NTx86]
+%NdisLwf_Desc%=Install, ms_wifi_lwf
+
+[MSFT.NTia64]
+%NdisLwf_Desc%=Install, ms_wifi_lwf
+
+[MSFT.NTamd64]
+%NdisLwf_Desc%=Install, ms_wifi_lwf
+
+;-------------------------------------------------------------------------
+; Installation Section
+;-------------------------------------------------------------------------
+[Install]
+AddReg=Inst_Ndi
+Characteristics=0x40000
+NetCfgInstanceId="{DF99CF69-B351-4038-92BD-D6BCE2B904B0}"
+Copyfiles = ndislwf.copyfiles.sys
+
+[SourceDisksNames]
+1=%NdisLwf_Desc%,"",,
+
+[SourceDisksFiles]
+ndislwf.sys=1
+
+[DestinationDirs]
+DefaultDestDir=12
+ndislwf.copyfiles.sys=12
+
+[ndislwf.copyfiles.sys]
+ndislwf.sys,,,2
+
+
+;-------------------------------------------------------------------------
+; Ndi installation support
+;-------------------------------------------------------------------------
+[Inst_Ndi]
+HKR, Ndi,Service,,"WIFILWF"
+HKR, Ndi,CoServices,0x00010000,"WIFILWF"
+HKR, Ndi,HelpText,,%NdisLwf_HelpText%
+HKR, Ndi,FilterClass,, ms_medium_converter_128
+HKR, Ndi,FilterType,0x00010001,0x00000002;the filter is a modifying filter. 1 monitoring filter.
+HKR, Ndi\Interfaces,UpperRange,,"noupper"
+HKR, Ndi\Interfaces,LowerRange,,"nolower"
+HKR, Ndi\Interfaces, FilterMediaTypes,,"wlan"
+HKR, Ndi,FilterRunType, 0x00010001, 2;this filter must run before any protocol can bind to the below miniport 
+
+;-------------------------------------------------------------------------
+; Service installation support
+;-------------------------------------------------------------------------
+[Install.Services]
+AddService=WIFILWF,,NdisLwf_Service_Inst
+
+[NdisLwf_Service_Inst]
+DisplayName     = %NdisLwf_Desc%
+ServiceType     = 1 ;SERVICE_KERNEL_DRIVER
+StartType       = 1 ;SERVICE_SYSTEM_START
+ErrorControl    = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\ndislwf.sys
+LoadOrderGroup  = NDIS
+Description     = %NdisLwf_Desc%
+AddReg          = Common.Params.reg
+
+[Install.Remove.Services]
+DelService=WIFILWF,0x200
+
+[Common.Params.reg]
+
+[Strings]
+Msft = "Microsoft"
+NdisLwf_Desc = "NDIS WIFI LightWeight Filter"
+NdisLwf_HelpText = "NDIS WIFI LightWeight Filters"
+
+
+
+
+
