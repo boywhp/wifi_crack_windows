@@ -1,9 +1,12 @@
 # wifi_crack_windows
 wifi crack project for windows
+
 如使用本工程代码用于商业软件, 请在Thanks列表里署个名boywhp@126.com, 谢谢!
+
 我的weibo: http://weibo.com/u/2702964511 欢迎打赏
 
 1. 命令行参数
+
 /Install	安装卸载wifi过滤驱动，未指定情况下，程序会自动检测并安装驱动
 /Uninstall	卸载wifi过滤驱动
 /Deauth 	发起deauth攻击，默认会不发起Deauth攻击
@@ -13,6 +16,7 @@ wifi crack project for windows
 /Bssid	bc:d1:77:f9:1d:cc	指定Bssid
 
 2. 常用场景
+
 /Deauth /Channel x	对指定的频道自动进行wifi攻击，并抓取EAPOL握手包，容易被用户察觉
 /Channel x	对指定频道进行嗅探，抓取EAPOL握手包，适合长时间运行
 
